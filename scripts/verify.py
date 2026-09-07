@@ -21,6 +21,16 @@ assert 'PUZZLES_PER_STAGE=3' in html
 assert 'puzzleRound' in html
 assert '퍼즐맞추기 ${puzzleRound} / ${PUZZLES_PER_STAGE}' in html
 assert 'puzzleRound<PUZZLES_PER_STAGE' in html
+assert '퍼즐맞추기 3/3 완료!' in html
+
+# Miss rules: bomb ends immediately, blanks allow three mistakes.
+assert 'MAX_MISTAKES=3' in html
+assert 'mistakes=0' in html
+assert 'mistakes++' in html
+assert '실수 ${mistakes} / ${MAX_MISTAKES}' in html
+assert 'if(mistakes>=MAX_MISTAKES)' in html
+assert "fail('폭탄! 같은 퍼즐맞추기에 다시 도전하세요.')" in html
+assert 'mistakeLabel' in html
 
 # Android bottom safe-area / home gesture overlap protection.
 assert 'safe-area-inset-bottom' in html
