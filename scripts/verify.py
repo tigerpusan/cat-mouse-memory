@@ -3,13 +3,20 @@ from pathlib import Path
 html = Path('www/index.html').read_text()
 icons = Path('scripts/generate_icons.py').read_text()
 
-# Existing game identity and core flow stay intact.
+# Game identity and core flow.
 assert '<h1>고양이퍼즐</h1>' in html
 assert '쥐를 모두 찾아라. 폭탄은 안돼.' in html
 assert '숨은 쥐' in html and '찾은 쥐' in html and '기억 시작' in html
-assert '다시하기' in html and '다음 스테이지' in html
+assert '다시하기' in html and '게임 단계' in html
 
-# Regression requirements for this patch.
+# Current UX requirements.
+assert '퍼즐 단계' in html
+assert '퍼즐이 열릴 때 쥐와 폭탄의 위치를 기억하세요.' in html
+assert '다음 단계로 이동합니다.' in html
+assert "setTimeout(()=>{stageIndex++;setup()},1200)" in html
+assert '다음 스테이지' not in html
+
+# Regression requirements.
 assert '100dvh' in html
 assert 'overflow:hidden' in html
 assert 'max-height:100dvh' in html or 'height:100dvh' in html
